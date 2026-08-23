@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PackImpresión – Servicios de Impresión</title>
+
+<title>PackImpresión – Impresión de Fotos y Documentos en San Isidro</title>
+
+<meta name="description" content="PackImpresión ofrece impresión premium de fotos, documentos A4 y A3, restauración de fotos antiguas y servicio rápido en San Isidro. Calidad profesional al mejor precio.">
 
 <style>
 :root {
@@ -30,68 +33,51 @@ body {
   padding: 0 1.5rem;
 }
 
-/* LOGO */
-.logo-img {
-  width: 80px;
-  height: auto;
-  border-radius: 10px;
-}
-
 /* HEADER */
 header {
   padding: 2rem 0;
   border-bottom: 1px solid #e5e5e5;
+  text-align: center;
 }
 
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.logo-text {
-  font-size: 2rem;
-  font-weight: 700;
-}
-
-.logo-text span:first-child { color: var(--black); }
-.logo-text span:last-child { color: var(--blue-logo); }
-
-.tagline {
-  font-size: 1rem;
-  color: #666;
+.logo-img {
+  width: 260px;
+  height: auto;
 }
 
 /* HERO */
 .hero {
   padding: 3rem 0;
   text-align: center;
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 50%, var(--yellow) 100%);
+  color: white;
+  border-radius: 0 0 40px 40px;
 }
 
 .hero h1 {
-  font-size: 2.4rem;
+  font-size: 2.6rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .hero p {
-  font-size: 1.1rem;
-  color: #555;
+  font-size: 1.15rem;
   max-width: 700px;
   margin: auto;
+  opacity: 0.95;
 }
 
 .whatsapp-btn {
   display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.8rem 1.4rem;
+  margin-top: 1.8rem;
+  padding: 1rem 1.6rem;
   background: #25D366;
   color: white;
   border-radius: 50px;
   font-weight: 600;
   text-decoration: none;
-  font-size: 1rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  font-size: 1.1rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
 }
 
 /* SECCIONES */
@@ -100,10 +86,18 @@ header {
 }
 
 .section-title {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1rem;
   text-align: center;
+  color: var(--black);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 1rem;
 }
 
 .grid {
@@ -118,6 +112,7 @@ header {
   padding: 1.5rem;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
   transition: transform 0.2s;
+  border-top: 5px solid var(--blue-logo);
 }
 
 .card:hover {
@@ -125,7 +120,7 @@ header {
 }
 
 .card-title {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 0.4rem;
 }
@@ -137,9 +132,36 @@ header {
 }
 
 .price {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--blue-logo);
+}
+
+/* BENEFICIOS */
+.benefits {
+  background: var(--gray-light);
+  padding: 2rem;
+  border-radius: 20px;
+  margin-top: 3rem;
+}
+
+.benefits h3 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.benefits ul {
+  max-width: 700px;
+  margin: auto;
+  list-style: none;
+  padding: 0;
+}
+
+.benefits li {
+  padding: 0.6rem 0;
+  font-size: 1.05rem;
+  text-align: center;
 }
 
 /* FOOTER */
@@ -157,22 +179,12 @@ footer {
 <body>
 
 <header>
-  <div class="container">
-    <div class="logo-area">
-      <!-- INSERTA AQUÍ TU LOGO REAL -->
-      <img src="logo.png" alt="PackImpresión Logo" class="logo-img">
-
-      <div>
-        <div class="logo-text"><span>Pack</span><span>Impresión</span></div>
-        <div class="tagline">Calidad profesional – San Isidro</div>
-      </div>
-    </div>
-  </div>
+  <img src="/logo.png" alt="Logo PackImpresión" class="logo-img">
 </header>
 
 <section class="hero">
-  <h1>Impresión Premium al Mejor Precio</h1>
-  <p>Estamos iniciando este proyecto con mucha ilusión. Esta es una prueba de lanzamiento para ofrecerte un servicio rápido, elegante y profesional.</p>
+  <h1>Impresión Premium en San Isidro</h1>
+  <p>Fotos, documentos, restauración y más. Calidad profesional al mejor precio, con entrega rápida y atención cercana.</p>
   <a href="https://wa.me/34684792506" class="whatsapp-btn">WhatsApp: 684 792 506</a>
 </section>
 
@@ -180,12 +192,15 @@ footer {
 
   <section class="section">
     <h2 class="section-title">Packs de Fotos</h2>
+    <p class="section-subtitle">Impresión fotográfica en papel premium.</p>
+
     <div class="grid">
       <div class="card">
         <div class="card-title">Pack 10 fotos 10x15</div>
         <div class="card-sub">Formato clásico para recuerdos.</div>
         <div class="price">5 €</div>
       </div>
+
       <div class="card">
         <div class="card-title">Pack 22 fotos 10x15</div>
         <div class="card-sub">Ideal para álbumes.</div>
@@ -196,22 +211,27 @@ footer {
 
   <section class="section">
     <h2 class="section-title">Impresiones A4 y A3</h2>
+    <p class="section-subtitle">Perfectas para documentos, pósters y fotografías grandes.</p>
+
     <div class="grid">
       <div class="card">
         <div class="card-title">1 A4</div>
         <div class="card-sub">Impresión fotográfica.</div>
         <div class="price">4,50 €</div>
       </div>
+
       <div class="card">
         <div class="card-title">2 A4</div>
         <div class="card-sub">Ahorro en doble impresión.</div>
         <div class="price">8 €</div>
       </div>
+
       <div class="card">
         <div class="card-title">1 A3</div>
         <div class="card-sub">Formato grande.</div>
         <div class="price">10 €</div>
       </div>
+
       <div class="card">
         <div class="card-title">2 A3</div>
         <div class="card-sub">Perfecto para decoración.</div>
@@ -222,18 +242,32 @@ footer {
 
   <section class="section">
     <h2 class="section-title">Servicios Especiales</h2>
+    <p class="section-subtitle">Soluciones profesionales para tus fotos.</p>
+
     <div class="grid">
       <div class="card">
         <div class="card-title">Foto carnet</div>
         <div class="card-sub">Fondo blanco o azul.</div>
         <div class="price">5 €</div>
       </div>
+
       <div class="card">
         <div class="card-title">Restauración de fotos antiguas</div>
         <div class="card-sub">Digitalización y reparación.</div>
         <div class="price">Desde 5 €</div>
       </div>
     </div>
+  </section>
+
+  <section class="benefits">
+    <h3>¿Por qué elegir PackImpresión?</h3>
+    <ul>
+      <li>✔ Calidad fotográfica premium</li>
+      <li>✔ Entrega rápida en San Isidro</li>
+      <li>✔ Precios accesibles</li>
+      <li>✔ Atención cercana y personalizada</li>
+      <li>✔ Restauración profesional de fotos antiguas</li>
+    </ul>
   </section>
 
 </div>
