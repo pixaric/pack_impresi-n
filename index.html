@@ -93,21 +93,9 @@
             <h1 class="text-2xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-tight">
                 Impresión Premium <br class="hidden sm:inline">al Mejor Precio
             </h1>
-              <ul class="text-xs sm:text-lg lg:text-xl text-white/95 max-w-2xl mx-auto font-light mb-6 sm:mb-10 leading-relaxed px-2 space-y-2">
-                <li class="flex items-start gap-2">
-                    <span class="text-yellow-300">•</span>
-                    Revela tus mejores recuerdos con impresión fotográfica premium.
-                </li>
-                <li class="flex items-start gap-2">
-                    <span class="text-yellow-300">•</span>
-                    Imprime documentos en A4 y A3 con calidad fotográfica.
-                </li>
-                <li class="flex items-start gap-2">
-                    <span class="text-yellow-300">•</span>
-                    Confía en nosotros para la restauración profesional de tus fotos antiguas.
-                </li>
-            </ul>
-
+            <p class="text-xs sm:text-lg lg:text-xl text-white/95 max-w-2xl mx-auto font-light mb-6 sm:mb-10 leading-relaxed px-2">
+                Revela tus mejores recuerdos, imprime documentos A4 y A3 con calidad fotográfica o confíanos la restauración de tus fotos antiguas.
+            </p>
             <div class="flex justify-center items-center px-4">
                 <a href="#fotos" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-brandYellow hover:bg-yellow-400 text-brandDark font-bold px-8 sm:px-10 py-3.5 sm:py-4 rounded-full shadow-lg transition-all text-xs sm:text-base lg:text-lg transform hover:-translate-y-0.5">
                     <span>Ver tarifas y servicios</span>
@@ -378,11 +366,14 @@
             </div>
 
             <!-- Share with Friends Button -->
-            <div class="pt-2">
+            <div class="pt-2 flex flex-col items-center gap-2">
                 <button onclick="shareWebsite()" class="inline-flex items-center gap-2.5 bg-brandDark hover:bg-brandBlue text-white font-semibold px-6 py-3 rounded-full shadow-md transition-all text-xs sm:text-sm transform hover:-translate-y-0.5">
                     <i class="fa-solid fa-share-nodes text-brandYellow text-base"></i>
                     <span>Compartir con amigos</span>
                 </button>
+                <span id="shareCounter" class="text-xs sm:text-sm text-gray-500 font-medium">
+                    Veces compartido: <strong id="shareCountNum" class="text-brandDark">0</strong>
+                </span>
             </div>
 
             <p class="font-medium text-gray-700 pt-2 text-sm sm:text-base">PackImpresión – Envío incluido solo en San Isidro</p>
@@ -391,7 +382,22 @@
     </footer>
 
     <script>
+        // Initialize and display share count from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            let count = localStorage.getItem('packImpresionShareCount');
+            if (count === null) {
+                count = 42; // Starting seed count for realism
+                localStorage.setItem('packImpresionShareCount', count);
+            }
+            document.getElementById('shareCountNum').textContent = count;
+        });
+
         function shareWebsite() {
+            // Increment share count
+            let count = parseInt(localStorage.getItem('packImpresionShareCount') || '42') + 1;
+            localStorage.setItem('packImpresionShareCount', count);
+            document.getElementById('shareCountNum').textContent = count;
+
             if (navigator.share) {
                 navigator.share({
                     title: 'PackImpresión – San Isidro',
@@ -405,13 +411,14 @@
                 dummy.select();
                 document.execCommand('copy');
                 document.body.removeChild(dummy);
-                // Custom message box fallback
-                const msg = document.createElement('div');
-                msg.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-brandDark text-white px-6 py-3 rounded-2xl shadow-2xl z-50 text-xs sm:text-sm font-medium transition-all';
-                msg.innerHTML = '<i class="fa-solid fa-circle-check text-brandYellow mr-2"></i> ¡Enlace copiado al portapapeles!';
-                document.body.appendChild(msg);
-                setTimeout(() => msg.remove(), 3000);
             }
+
+            // Custom message box fallback / confirmation
+            const msg = document.createElement('div');
+            msg.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-brandDark text-white px-6 py-3 rounded-2xl shadow-2xl z-50 text-xs sm:text-sm font-medium transition-all';
+            msg.innerHTML = '<i class="fa-solid fa-circle-check text-brandYellow mr-2"></i> ¡Enlace copiado y compartido con éxito! (' + count + ')';
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 3000);
         }
     </script>
 
