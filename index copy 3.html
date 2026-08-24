@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PackImpresión – Impresión de Fotos y Documentos en San Isidro</title>
+    <meta name="description" content="PackImpresión ofrece impresión premium de fotos, documentos A4 y A3, restauración de fotos antiguas y servicio rápido en San Isidro. Calidad profesional al mejor precio.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandRed: '#e63946',
+                        brandBlue: '#1d3557',
+                        brandBlueBright: '#0077cc',
+                        brandYellow: '#ffb703',
+                        brandYellowAccent: '#ffd166',
+                        brandDark: '#121212',
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1d3557 0%, #0077cc 45%, #e63946 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(29, 53, 87, 0.08), 0 8px 10px -6px rgba(29, 53, 87, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased selection:bg-brandRed selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all">
+        <div class="max-w-7xl mx-auto px-3 sm:px-8 lg:px-12 h-16 sm:h-24 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="#" class="flex items-center">
+                    <!-- Original logo image restored -->
+                    <img src="logo.png" alt="Logo PackImpresión" class="w-32 sm:w-52 lg:w-60 h-auto object-contain" onerror="this.src='https://placehold.co/240x60/1d3557/ffffff?text=PackImpresion'">
+                </a>
+            </div>
+            
+            <nav class="hidden md:flex items-center gap-8 font-medium text-base lg:text-lg text-gray-700">
+                <a href="#fotos" class="hover:text-brandRed transition-colors">Packs Fotos</a>
+                <a href="#documentos" class="hover:text-brandRed transition-colors">A4 y A3</a>
+                <a href="#especiales" class="hover:text-brandRed transition-colors">Especiales</a>
+                <a href="#beneficios" class="hover:text-brandRed transition-colors">Por qué elegirnos</a>
+            </nav>
+
+            <div class="flex items-center gap-2 sm:gap-4">
+                <!-- Social Media Buttons -->
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gray-100 hover:bg-[#1877F2] hover:text-white text-gray-700 flex items-center justify-center transition-all shadow-sm text-sm sm:text-lg">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gray-100 hover:bg-gradient-to-tr hover:from-[#fdf497] hover:via-[#f58529] hover:to-[#dd2a7b] hover:text-white text-gray-700 flex items-center justify-center transition-all shadow-sm text-sm sm:text-lg">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="https://wa.me/34684792506?text=Hola,%20me%20gustaría%20consultar%20sobre%20una%20impresión" target="_blank" class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-3.5 sm:px-6 py-2 sm:py-3 rounded-full shadow-md shadow-emerald-500/20 transition-all transform hover:-translate-y-0.5 text-xs sm:text-base">
+                    <i class="fa-brands fa-whatsapp text-base sm:text-xl"></i>
+                    <span class="hidden xs:inline">684 792 506</span>
+                    <span class="xs:hidden">WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative hero-gradient text-white py-10 sm:py-24 lg:py-32 overflow-hidden rounded-b-[2rem] sm:rounded-b-[3.5rem]">
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="absolute -right-24 -bottom-24 w-64 sm:w-[32rem] h-64 sm:h-[32rem] rounded-full bg-brandYellow/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-24 -top-24 w-64 sm:w-[32rem] h-64 sm:h-[32rem] rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
+        
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-8 lg:px-12 text-center">
+            <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-brandYellow text-brandDark font-bold text-xs sm:text-base mb-6 shadow-sm">
+                <i class="fa-solid fa-bolt text-brandRed"></i> Servicio rápido en San Isidro
+            </span>
+            <h1 class="text-2xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-tight">
+                Impresión Premium <br class="hidden sm:inline">al Mejor Precio
+            </h1>
+            <p class="text-xs sm:text-lg lg:text-xl text-white/95 max-w-2xl mx-auto font-light mb-6 sm:mb-10 leading-relaxed px-2">
+                Revela tus mejores recuerdos, imprime documentos A4 y A3 con calidad fotográfica o confíanos la restauración de tus fotos antiguas.
+            </p>
+            <div class="flex justify-center items-center px-4">
+                <a href="#fotos" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-brandYellow hover:bg-yellow-400 text-brandDark font-bold px-8 sm:px-10 py-3.5 sm:py-4 rounded-full shadow-lg transition-all text-xs sm:text-base lg:text-lg transform hover:-translate-y-0.5">
+                    <span>Ver tarifas y servicios</span>
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-3 sm:px-8 lg:px-12 py-8 sm:py-20 space-y-12 sm:space-y-24">
+
+        <!-- FOTOS SECTION -->
+        <section id="fotos" class="scroll-mt-28">
+            <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-12">
+                <div class="inline-block p-3 sm:p-4 rounded-2xl bg-blue-100 text-brandBlueBright mb-3 text-xl sm:text-2xl">
+                    <i class="fa-solid fa-images"></i>
+                </div>
+                <h2 class="text-xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight">Packs de Fotos</h2>
+                <p class="text-gray-600 text-xs sm:text-base lg:text-lg mt-2">Impresión fotográfica profesional en papel premium con colores vivos.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 max-w-3xl mx-auto">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 card-shadow border border-gray-100 relative overflow-hidden group hover:border-brandBlueBright transition-all duration-300 flex flex-col justify-between">
+                    <div class="absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-gradient-to-r from-brandBlueBright to-brandBlue"></div>
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <span class="text-[10px] sm:text-sm font-bold uppercase tracking-wider text-brandBlueBright bg-blue-50 px-2.5 py-1 rounded-full">Clásico</span>
+                                <h3 class="text-base sm:text-2xl font-bold text-gray-900 mt-2 sm:mt-3">Pack 10 fotos 10x15</h3>
+                                <p class="text-gray-500 text-xs sm:text-base mt-1">Formato ideal para recuerdos cotidianos.</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xl sm:text-3xl lg:text-4xl font-black text-brandBlue">5 €</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-xs sm:text-base text-gray-600 my-4 sm:my-6 border-t border-gray-100 pt-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-sm sm:text-base"></i> Papel brillante u mate</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-sm sm:text-base"></i> Revelado HD</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/34684792506?text=Hola,%20quiero%20pedir%20el%20Pack%2010%20fotos%2010x15%20(5€)" target="_blank" class="w-full block text-center bg-brandDark hover:bg-brandRed text-white font-semibold py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl transition-colors text-xs sm:text-base shadow-sm">
+                        Pedir este pack
+                    </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 card-shadow border border-gray-100 relative overflow-hidden group hover:border-brandRed transition-all duration-300 ring-1 ring-brandRed/10 flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 bg-brandRed text-white text-[9px] sm:text-xs font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">Popular</div>
+                    <div class="absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-gradient-to-r from-brandRed to-pink-600"></div>
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <span class="text-[10px] sm:text-sm font-bold uppercase tracking-wider text-brandRed bg-red-50 px-2.5 py-1 rounded-full">Ahorro</span>
+                                <h3 class="text-base sm:text-2xl font-bold text-gray-900 mt-2 sm:mt-3">Pack 22 fotos 10x15</h3>
+                                <p class="text-gray-500 text-xs sm:text-base mt-1">Ideal para álbumes familiares.</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xl sm:text-3xl lg:text-4xl font-black text-brandRed">10 €</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-xs sm:text-base text-gray-600 my-4 sm:my-6 border-t border-gray-100 pt-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-sm sm:text-base"></i> Papel fotográfico premium</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-sm sm:text-base"></i> Máxima relación calidad-precio</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/34684792506?text=Hola,%20quiero%20pedir%20el%20Pack%2022%20fotos%2010x15%20(10€)" target="_blank" class="w-full block text-center bg-brandRed hover:bg-red-700 text-white font-semibold py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl transition-colors text-xs sm:text-base shadow-md shadow-brandRed/20">
+                        Pedir este pack
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOCUMENTOS SECTION -->
+        <section id="documentos" class="scroll-mt-28">
+            <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-12">
+                <div class="inline-block p-3 sm:p-4 rounded-2xl bg-yellow-100 text-amber-700 mb-3 text-xl sm:text-2xl">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+                <h2 class="text-xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight">Impresiones A4 y A3</h2>
+                <p class="text-gray-600 text-xs sm:text-base lg:text-lg mt-2">Perfectas para documentos de calidad, pósters y fotografías grandes.</p>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+                <!-- A4 - 1 -->
+                <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 card-shadow border border-gray-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform">
+                    <div>
+                        <span class="text-[10px] sm:text-xs font-bold text-brandBlueBright uppercase">A4</span>
+                        <h3 class="text-sm sm:text-xl font-bold text-gray-900 mt-1 sm:mt-2">1 Hoja A4</h3>
+                        <p class="text-gray-500 text-[11px] sm:text-sm mt-0.5 sm:mt-1">Alta calidad.</p>
+                    </div>
+                    <div class="my-3 sm:my-6">
+                        <span class="text-lg sm:text-2xl lg:text-3xl font-extrabold text-gray-900">4,50 €</span>
+                    </div>
+                    <a href="https://wa.me/34684792506?text=Hola,%20quiero%20imprimir%201%20A4%20(4.50€)" target="_blank" class="w-full text-center bg-gray-100 hover:bg-brandDark hover:text-white text-gray-800 font-semibold py-2 sm:py-3 rounded-xl sm:rounded-2xl transition-colors text-xs sm:text-base">
+                        Solicitar
+                    </a>
+                </div>
+
+                <!-- A4 - 2 -->
+                <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 card-shadow border border-gray-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform">
+                    <div>
+                        <span class="text-[10px] sm:text-xs font-bold text-brandBlueBright uppercase">A4</span>
+                        <h3 class="text-sm sm:text-xl font-bold text-gray-900 mt-1 sm:mt-2">2 Hojas A4</h3>
+                        <p class="text-gray-500 text-[11px] sm:text-sm mt-0.5 sm:mt-1">Doble impresión.</p>
+                    </div>
+                    <div class="my-3 sm:my-6">
+                        <span class="text-lg sm:text-2xl lg:text-3xl font-extrabold text-gray-900">8 €</span>
+                    </div>
+                    <a href="https://wa.me/34684792506?text=Hola,%20quiero%20imprimir%202%20A4%20(8€)" target="_blank" class="w-full text-center bg-gray-100 hover:bg-brandDark hover:text-white text-gray-800 font-semibold py-2 sm:py-3 rounded-xl sm:rounded-2xl transition-colors text-xs sm:text-base">
+                        Solicitar
+                    </a>
+                </div>
+
+                <!-- A3 - 1 -->
+                <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 card-shadow border border-gray-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform">
+                    <div>
+                        <span class="text-[10px] sm:text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full uppercase">Gran Formato</span>
+                        <h3 class="text-sm sm:text-xl font-bold text-gray-900 mt-1.5 sm:mt-2">1 Hoja A3</h3>
+                        <p class="text-gray-500 text-[11px] sm:text-sm mt-0.5 sm:mt-1">Planos y pósters.</p>
+                    </div>
+                    <div class="my-3 sm:my-6">
+                        <span class="text-lg sm:text-2xl lg:text-3xl font-extrabold text-gray-900">10 €</span>
+                    </div>
+                    <a href="https://wa.me/34684792506?text=Hola,%20quiero%20imprimir%201%20A3%20(10€)" target="_blank" class="w-full text-center bg-gray-100 hover:bg-brandDark hover:text-white text-gray-800 font-semibold py-2 sm:py-3 rounded-xl sm:rounded-2xl transition-colors text-xs sm:text-base">
+                        Solicitar
+                    </a>
+                </div>
+
+                <!-- A3 - 2 -->
+                <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 card-shadow border border-gray-100 flex flex-col justify-between hover:-translate-y-1.5 transition-transform">
+                    <div>
+                        <span class="text-[10px] sm:text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full uppercase">Gran Formato</span>
+                        <h3 class="text-sm sm:text-xl font-bold text-gray-900 mt-1.5 sm:mt-2">2 Hojas A3</h3>
+                        <p class="text-gray-500 text-[11px] sm:text-sm mt-0.5 sm:mt-1">Decoración.</p>
+                    </div>
+                    <div class="my-3 sm:my-6">
+                        <span class="text-lg sm:text-2xl lg:text-3xl font-extrabold text-gray-900">18 €</span>
+                    </div>
+                    <a href="https://wa.me/34684792506?text=Hola,%20quiero%20imprimir%202%20A3%20(18€)" target="_blank" class="w-full text-center bg-gray-100 hover:bg-brandDark hover:text-white text-gray-800 font-semibold py-2 sm:py-3 rounded-xl sm:rounded-2xl transition-colors text-xs sm:text-base">
+                        Solicitar
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICIOS ESPECIALES SECTION -->
+        <section id="especiales" class="scroll-mt-28">
+            <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-12">
+                <div class="inline-block p-3 sm:p-4 rounded-2xl bg-red-100 text-brandRed mb-3 text-xl sm:text-2xl">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h2 class="text-xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight">Servicios Especiales</h2>
+                <p class="text-gray-600 text-xs sm:text-base lg:text-lg mt-2">Soluciones profesionales adaptadas a tus necesidades específicas.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 max-w-4xl mx-auto">
+                <!-- Carnet -->
+                <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 card-shadow border border-gray-100 flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-blue-50 text-brandBlueBright flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <div class="flex-grow text-center sm:text-left w-full">
+                        <span class="text-[10px] sm:text-sm font-bold uppercase tracking-wider text-brandBlueBright">Identificación</span>
+                        <h3 class="text-base sm:text-xl font-bold text-gray-900 mt-1">Foto Carnet</h3>
+                        <p class="text-gray-500 text-xs sm:text-base mt-1">Fondo blanco o azul para DNI/Pasaporte.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-lg sm:text-2xl font-extrabold text-gray-900">5 €</span>
+                            <a href="https://wa.me/34684792506?text=Hola,%20necesito%20fotos%20carnet%20(5€)" target="_blank" class="bg-brandBlueBright hover:bg-blue-600 text-white text-xs sm:text-base font-semibold px-5 py-2.5 rounded-xl sm:rounded-2xl transition-colors">
+                                Solicitar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restauración -->
+                <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 card-shadow border border-gray-100 flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-red-50 text-brandRed flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-solid fa-photo-film"></i>
+                    </div>
+                    <div class="flex-grow text-center sm:text-left w-full">
+                        <span class="text-[10px] sm:text-sm font-bold uppercase tracking-wider text-brandRed">Memoria viva</span>
+                        <h3 class="text-base sm:text-xl font-bold text-gray-900 mt-1">Restauración de fotos</h3>
+                        <p class="text-gray-500 text-xs sm:text-base mt-1">Reparación profesional de fotos antiguas.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-lg sm:text-2xl font-extrabold text-gray-900">Desde 5 €</span>
+                            <a href="https://wa.me/34684792506?text=Hola,%20quiero%20consultar%20sobre%20la%20restauración%20de%20una%20foto%20antigua" target="_blank" class="bg-brandRed hover:bg-red-700 text-white text-xs sm:text-base font-semibold px-5 py-2.5 rounded-xl sm:rounded-2xl transition-colors">
+                                Consultar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BENEFICIOS SECTION -->
+        <section id="beneficios" class="bg-brandDark text-white rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-14 relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-brandBlueBright/10 blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -bottom-20 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-brandRed/10 blur-3xl pointer-events-none"></div>
+
+            <div class="relative max-w-4xl mx-auto text-center">
+                <h3 class="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3">¿Por qué elegir PackImpresión?</h3>
+                <p class="text-gray-400 text-xs sm:text-base lg:text-lg mb-8 max-w-xl mx-auto">Nos esforzamos por ofrecerte resultados profesionales con cercanía y rapidez.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+                    <div class="flex items-start gap-4 p-4 sm:p-6 rounded-2xl bg-white/5 border border-white/10">
+                        <div class="w-10 h-10 rounded-xl bg-brandBlueBright/20 text-brandBlueBright flex items-center justify-center shrink-0 text-lg">
+                            <i class="fa-solid fa-gem"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm sm:text-lg text-white">Calidad fotográfica premium</h4>
+                            <p class="text-xs sm:text-sm text-gray-400 mt-1">Insumos de primera para acabados impecables.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 sm:p-6 rounded-2xl bg-white/5 border border-white/10">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 text-lg">
+                            <i class="fa-solid fa-person-biking"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm sm:text-lg text-white">Entrega rápida en San Isidro</h4>
+                            <p class="text-xs sm:text-sm text-gray-400 mt-1">Servicio ágil adaptado a tus plazos.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 sm:p-6 rounded-2xl bg-white/5 border border-white/10">
+                        <div class="w-10 h-10 rounded-xl bg-brandYellow/20 text-brandYellow flex items-center justify-center shrink-0 text-lg">
+                            <i class="fa-solid fa-tags"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm sm:text-lg text-white">Precios accesibles</h4>
+                            <p class="text-xs sm:text-sm text-gray-400 mt-1">Tarifas justas y packs para ahorrar.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 sm:p-6 rounded-2xl bg-white/5 border border-white/10">
+                        <div class="w-10 h-10 rounded-xl bg-brandRed/20 text-brandRed flex items-center justify-center shrink-0 text-lg">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm sm:text-lg text-white">Atención cercana</h4>
+                            <p class="text-xs sm:text-sm text-gray-400 mt-1">Trato humano y personalizado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 py-10 sm:py-16 mt-16 text-center text-xs sm:text-sm text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 space-y-6">
+            <div class="flex justify-center items-center">
+                <img src="logo.png" alt="PackImpresión Logo" class="w-32 sm:w-44 h-auto object-contain opacity-80" onerror="this.style.display='none'">
+            </div>
+            
+            <!-- Footer Social Media Links -->
+            <div class="flex justify-center items-center gap-4 pt-1">
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gray-100 hover:bg-[#1877F2] hover:text-white text-gray-700 flex items-center justify-center transition-all text-sm sm:text-base">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gray-100 hover:bg-gradient-to-tr hover:from-[#fdf497] hover:via-[#f58529] hover:to-[#dd2a7b] hover:text-white text-gray-700 flex items-center justify-center transition-all text-sm sm:text-base">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/34684792506?text=Hola,%20me%20gustaría%20consultar" target="_blank" aria-label="WhatsApp" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gray-100 hover:bg-emerald-500 hover:text-white text-gray-700 flex items-center justify-center transition-all text-sm sm:text-base">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+
+            <!-- Share with Friends Button -->
+            <div class="pt-2 flex flex-col items-center gap-2">
+                <button onclick="shareWebsite()" class="inline-flex items-center gap-2.5 bg-brandDark hover:bg-brandBlue text-white font-semibold px-6 py-3 rounded-full shadow-md transition-all text-xs sm:text-sm transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-share-nodes text-brandYellow text-base"></i>
+                    <span>Compartir con amigos</span>
+                </button>
+                <span id="shareCounter" class="text-xs sm:text-sm text-gray-500 font-medium">
+                    Veces compartido: <strong id="shareCountNum" class="text-brandDark">0</strong>
+                </span>
+            </div>
+
+            <p class="font-medium text-gray-700 pt-2 text-sm sm:text-base">PackImpresión – Envío incluido solo en San Isidro</p>
+            <p class="text-xs sm:text-sm text-gray-400">Proyecto en fase de prueba. Gracias por apoyar este comienzo.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize and display share count from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            let count = localStorage.getItem('packImpresionShareCount');
+            if (count === null) {
+                count = 42; // Starting seed count for realism
+                localStorage.setItem('packImpresionShareCount', count);
+            }
+            document.getElementById('shareCountNum').textContent = count;
+        });
+
+        function shareWebsite() {
+            // Increment share count
+            let count = parseInt(localStorage.getItem('packImpresionShareCount') || '42') + 1;
+            localStorage.setItem('packImpresionShareCount', count);
+            document.getElementById('shareCountNum').textContent = count;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'PackImpresión – San Isidro',
+                    text: '¡Hola! Echa un vistazo a PackImpresión para revelar tus fotos y documentos con calidad profesional en San Isidro:',
+                    url: window.location.href,
+                }).catch(() => {});
+            } else {
+                const dummy = document.createElement('textarea');
+                document.body.appendChild(dummy);
+                dummy.value = '¡Hola! Echa un vistazo a PackImpresión: ' + window.location.href;
+                dummy.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummy);
+            }
+
+            // Custom message box fallback / confirmation
+            const msg = document.createElement('div');
+            msg.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-brandDark text-white px-6 py-3 rounded-2xl shadow-2xl z-50 text-xs sm:text-sm font-medium transition-all';
+            msg.innerHTML = '<i class="fa-solid fa-circle-check text-brandYellow mr-2"></i> ¡Enlace copiado y compartido con éxito! (' + count + ')';
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 3000);
+        }
+    </script>
+
+</body>
+</html>
