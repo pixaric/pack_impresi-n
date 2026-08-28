@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mis puntos - Pack impresión</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      max-width: 420px;
+      width: 100%;
+    }
+    .brand {
+      font-weight: 600;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    .subtitle {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: none;
+      background: #111827;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #000000;
+    }
+    .resultado {
+      margin-top: 20px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .error {
+      color: #b91c1c;
+    }
+    .puntos {
+      font-size: 26px;
+      font-weight: 600;
+      margin: 8px 0;
+    }
+    .nivel {
+      font-size: 14px;
+      color: #4b5563;
+    }
+    .fecha {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand">Pack impresión</div>
+    <div class="subtitle">Consulta tus puntos acumulados</div>
+
+    <input id="email" placeholder="Introduce tu email">
+    <button onclick="consultar()">Ver mis puntos</button>
+
+    <div id="resultado" class="resultado"></div>
+  </div>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbzUUY3HlYNUb9HEjGuFO3ZVIfW46Eo3LU-wl7-G7bzZe4uW4mgJDPizHNM1_DA5Htd_Pg/exec"; // pega aquí tu URL de Apps Script
+
+    function consultar() {
+      const email = document.getElementById("email").value.trim();
+      const resultado = document.getElementById("resultado");
+
+      if (!email) {
+        resultado.innerHTML = "<span class='error'>Por favor, introduce tu email.</span>";
+        return;
+      }
+
+      resultado.innerHTML = "Consultando tus puntos...";
+
+      fetch(API_URL + "?email=" + encodeURIComponent(email))
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) {
+            resultado.innerHTML = "<span class='error'>" + data.error + "</span>";
+          } else {
+            resultado.innerHTML =
+              "<div><strong>" + data.nombre + "</strong></div>" +
+              "<div class='puntos'>" + data.puntos + " puntos</div>" +
+              "<div class='nivel'>Nivel: " + (data.nivel || "Sin nivel") + "</div>" +
+              "<div class='fecha'>Actualizado: " + (data.ultima_actualizacion || "-") + "</div>" +
+              "<div style='margin-top:12px; font-size:13px; color:#4b5563;'>Historial: " +
+              (data.historial || "Sin historial registrado") +
+              "</div>";
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          resultado.innerHTML = "<span class='error'>Error al consultar los puntos. Inténtalo de nuevo.</span>";
+        });
+    }
+  </script>
+</body>
+</html>
