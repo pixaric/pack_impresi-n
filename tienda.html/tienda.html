@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Tienda – PackImpresión</title>
+
+<meta name="description" content="Tienda PackImpresión: llaveros personalizados, cuadros decorativos, regalos fotográficos y más. Compra fácil con carrito y WhatsApp.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+/* Animación de entrada */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación hover */
+.product-card:hover {
+    transform: translateY(-6px);
+    transition: 0.3s ease;
+}
+</style>
+
+</head>
+
+<body class="bg-gray-50">
+
+<!-- HEADER -->
+<header class="py-6 bg-white shadow-sm fade-in">
+    <div class="container mx-auto text-center">
+        <img src="/logo.png" alt="PackImpresión Logo" class="w-40 mx-auto">
+        <h1 class="text-2xl font-bold text-[#0077cc] mt-2">Tienda PackImpresión</h1>
+        <p class="text-gray-600">Llaveros, cuadros y regalos personalizados</p>
+    </div>
+</header>
+
+<!-- TIENDA DINÁMICA -->
+<section class="py-12 fade-in">
+    <div id="tienda" class="container mx-auto grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+</section>
+
+<!-- CARRITO FLOTANTE -->
+<div id="cartBox" class="fixed bottom-4 right-4 bg-white shadow-2xl rounded-2xl p-4 w-72 hidden fade-in">
+    <h3 class="text-lg font-bold mb-3">Carrito</h3>
+    <ul id="cartItems" class="text-sm text-gray-700 space-y-2"></ul>
+    <p id="cartTotal" class="font-bold text-[#0077cc] mt-3"></p>
+
+    <button onclick="sendCartWhatsApp()"
+            class="w-full mt-4 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 rounded-xl transition">
+        Enviar pedido por WhatsApp
+    </button>
+</div>
+
+<!-- BOTÓN MOSTRAR CARRITO -->
+<button onclick="toggleCart()"
+        class="fixed bottom-4 left-4 bg-[#0077cc] text-white w-14 h-14 rounded-full shadow-xl text-2xl flex items-center justify-center fade-in relative">
+    🛒
+    <span id="cartCount"
+          class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">
+        0
+    </span>
+</button>
+
+
+<!-- JAVASCRIPT -->
+<script>
+/* ===========================
+   PRODUCTOS DINÁMICOS
+   =========================== */
+
+const productos = [
+    {
+        nombre: "Llavero Personalizado",
+        precio: 4,
+        img: "/img/llavero1.jpg",
+        etiqueta: "Más vendido"
+    },
+    {
+        nombre: "Llavero Metálico Premium",
+        precio: 6,
+        img: "/img/llavero2.jpg",
+        etiqueta: "Nuevo"
+    },
+    {
+        nombre: "Cuadro Decorativo A4",
+        precio: 12,
+        img: "/img/cuadro1.jpg",
+        etiqueta: "Oferta"
+    },
+    {
+        nombre: "Cuadro Decorativo A3",
+        precio: 18,
+        img: "/img/cuadro2.jpg",
+        etiqueta: "Popular"
+    },
+    {
+        nombre: "Foto Imán",
+        precio: 3,
+        img: "/img/regalo1.jpg",
+        etiqueta: "Más vendido"
+    },
+    {
+        nombre: "Mini Cuadro",
+        precio: 7,
+        img: "/img/regalo2.jpg",
+        etiqueta: "Nuevo"
+    },
+    {
+        nombre: "Foto en Madera",
+        precio: 15,
+        img: "/img/regalo3.jpg",
+        etiqueta: "Premium"
+    },
+    {
+        nombre: "Foto en Acrílico",
+        precio: 20,
+        img: "/img/regalo4.jpg",
+        etiqueta: "Oferta"
+    },
+    {
+        nombre: "Foto en Cristal",
+        precio: 25,
+        img: "/img/regalo5.jpg",
+        etiqueta: "Exclusivo"
+    },
+    {
+        nombre: "Marco Premium",
+        precio: 30,
+        img: "/img/regalo6.jpg",
+        etiqueta: "Nuevo"
+    }
+];
+
+/* ===========================
+   GENERAR PRODUCTOS
+   =========================== */
+
+function generarProductos() {
+    const tienda = document.getElementById("tienda");
+    tienda.innerHTML = "";
+
+    productos.forEach((p) => {
+        tienda.innerHTML += `
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-t-4 border-[#0077cc] product-card fade-in relative">
+
+            <span class="absolute bg-emerald-500 text-white text-xs font-semibold px-3 py-1 rounded-br-xl">
+                ${p.etiqueta}
+            </span>
+
+            <img src="${p.img}" class="w-full h-40 object-cover" alt="${p.nombre}">
+
+            <div class="p-4">
+                <h3 class="text-lg font-semibold mb-1">${p.nombre}</h3>
+                <p class="text-gray-600 text-sm mb-2">Producto personalizado PackImpresión.</p>
+                <p class="text-xl font-bold text-[#0077cc] mb-3">${p.precio} €</p>
+
+                <div class="flex items-center gap-3 mb-4">
+                    <button onclick="changeQty(this, -1)"
+                            class="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-lg text-lg font-bold">–</button>
+
+                    <span class="qty text-lg font-semibold">1</span>
+
+                    <button onclick="changeQty(this, 1)"
+                            class="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-lg text-lg font-bold">+</button>
+                </div>
+
+                <button onclick="addToCartQty('${p.nombre}', ${p.precio}, this)"
+                        class="w-full bg-[#0077cc] hover:bg-[#005fa3] text-white font-semibold py-2 rounded-xl transition">
+                    Añadir al carrito
+                </button>
+            </div>
+        </div>
+        `;
+    });
+}
+
+generarProductos();
+
+/* ===========================
+   CARRITO
+   =========================== */
+
+let cart = JSON.parse(localStorage.getItem('cartPackImpresion') || '[]');
+
+function changeQty(btn, amount) {
+    const qtySpan = btn.parentElement.querySelector('.qty');
+    let qty = parseInt(qtySpan.textContent);
+
+    qty += amount;
+    if (qty < 1) qty = 1;
+
+    qtySpan.textContent = qty;
+}
+
+function addToCartQty(name, price, btn) {
+    const qty = parseInt(btn.parentElement.querySelector('.qty').textContent);
+
+    for (let i = 0; i < qty; i++) {
+        cart.push({ name, price });
+    }
+
+    localStorage.setItem('cartPackImpresion', JSON.stringify(cart));
+    updateCartUI();
+    showCart();
+}
+
+function updateCartUI() {
+    const list = document.getElementById('cartItems');
+    list.innerHTML = '';
+
+    cart.forEach((item, index) => {
+        list.innerHTML += `
+            <li class="flex justify-between">
+                ${item.name} - ${item.price} €
+                <button class="text-red-500" onclick="removeItem(${index})">x</button>
+            </li>
+        `;
+    });
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    document.getElementById('cartTotal').textContent = "Total: " + total.toFixed(2) + " €";
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cartPackImpresion', JSON.stringify(cart));
+    updateCartUI();
+}
+
+function toggleCart() {
+    document.getElementById('cartBox').classList.toggle('hidden');
+}
+
+function showCart() {
+    document.getElementById('cartBox').classList.remove('hidden');
+}
+
+function sendCartWhatsApp() {
+    let message = "Hola, quiero realizar este pedido:%0A%0A";
+
+    cart.forEach(item => {
+        message += `• ${item.name} - ${item.price} €%0A`;
+    });
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    message += `%0ATotal: ${total.toFixed(2)} €`;
+
+    window.open("https://wa.me/34684792506?text=" + message, "_blank");
+}
+</script>
+
+</body>
+</html>
