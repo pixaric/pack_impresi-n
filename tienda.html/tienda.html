@@ -102,7 +102,16 @@
     </span>
 </button>
 
+<audio id="addSound" src="/tienda.html/sounds/add.mp3" preload="auto"></audio>
+
 <script>
+
+    function playAddSound() {
+    const sound = document.getElementById("addSound");
+    sound.currentTime = 0; // reinicia el sonido
+    sound.play();
+}
+
 /* ===========================
    PRODUCTOS
    =========================== */
@@ -157,9 +166,15 @@ generarProductos();
 let cart = JSON.parse(localStorage.getItem('cartPackImpresion') || '[]');
 
 function addToCartQty(name, price, btn) {
+
+    // Animación POP
     btn.classList.add("add-pop");
     setTimeout(() => btn.classList.remove("add-pop"), 300);
 
+    // Sonido
+    playAddSound();
+
+    // Lógica del carrito
     const existingItem = cart.find(item => item.name === name);
 
     if (existingItem) {
@@ -174,6 +189,7 @@ function addToCartQty(name, price, btn) {
     showToast(`${name} añadido al carrito`);
     showCart();
 }
+
 
 
 function updateCartUI() {
