@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cambiar Estado - Pack Impresión</title>
+<style>
+  body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
+  input, select { width: 100%; padding: 10px; margin: 10px 0; }
+  button { padding: 12px; background: #28a745; color: white; border: none; width: 100%; }
+  #lista { background: #f5f5f5; padding: 10px; margin-top: 10px; border-radius: 5px; }
+</style>
+</head>
+
+<body>
+
+<h2>Cambiar Estado de Trabajos</h2>
+
+<label>Cliente (email o teléfono)</label>
+<input id="cliente" type="text">
+
+<button onclick="buscarTrabajos()">Buscar trabajos</button>
+
+<div id="lista"></div>
+
+<label>Nuevo estado</label>
+<select id="estado">
+  <option value="En producción">En producción</option>
+  <option value="Listo para entrega">Listo para entrega</option>
+  <option value="Enviado">Enviado</option>
+  <option value="Entregado">Entregado</option>
+</select>
+
+<button onclick="actualizarEstado()">Actualizar Estado</button>
+
+<p id="msg"></p>
+
+<script>
+let trabajoSeleccionado = null;
+
+function buscarTrabajos() {
+  const cliente = document.getElementById("cliente").value;
+
+  fetch("https://script.google.com/macros/s/AKfycbx-NJvJHDb4A1f995xOoTucsjD8nu4fX_y88wXsAnWsPw21-TI85Z66oKWJrTE90ysXxw/exec" + cliente, {
+    method: "GET"
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.status === "ok" && data.trabajos.length > 0) {
+      let html = "<h3>Trabajos encontrados:</h3>";
+
+      data.trabajos.forEach(t => {
+        html += `
+          <div onclick="seleccionar('${t.id}')" style="padding:10px; border:1px solid #ccc; margin:5px; cursor:pointer;">
+            <b>ID:</b> ${t.id}<br>
+            <b>Tipo:</b> ${t.tipo}<br>
+            <b>Tamaño:</b> ${t.tamano}<br>
+            <b>Precio:</b> ${t.precio} €<br>
+            <b>Estado:</b> ${t.estado}<br>
+            <b>Cantidad:</b> ${t.cantidad}<br>
+          </div>
+        `;
+      });
+
+      document.getElementById("lista").innerHTML = html;
+    } else {
+      document.getElementById("lista").innerHTML = "No hay trabajos para este cliente";
+    }
+  });
+}
+
+
+
+function seleccionar(id) {
+  trabajoSeleccionado = id;
+  document.getElementById("msg").innerText = "Trabajo seleccionado: " + id;
+}
+
+function actualizarEstado() {
+  if (!trabajoSeleccionado) {
+    document.getElementById("msg").innerText = "Selecciona un trabajo primero";
+    return;
+  }
+
+  const payload = {
+    accion: "actualizar_estado",
+    id: trabajoSeleccionado,
+    estado: document.getElementById("estado").value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbx-NJvJHDb4A1f995xOoTucsjD8nu4fX_y88wXsAnWsPw21-TI85Z66oKWJrTE90ysXxw/exec", {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  document.getElementById("msg").innerText = "Estado actualizado correctamente";
+}
+</script>
+
+</body>
+</html>
