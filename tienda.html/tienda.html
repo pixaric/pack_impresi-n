@@ -1,12 +1,114 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PackImpresión – Impresión de Fotos y Documentos en San Isidro</title>
+    <meta name="description" content="PackImpresión ofrece impresión premium de fotos, documentos A4 y A3, restauración de fotos antiguas y servicio rápido en San Isidro. Calidad profesional al mejor precio.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandRed: '#e63946',
+                        brandBlue: '#1d3557',
+                        brandBlueBright: '#0077cc',
+                        brandYellow: '#ffb703',
+                        brandYellowAccent: '#ffd166',
+                        brandDark: '#121212',
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
-<title>Tienda – PackImpresión</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.png">
 
-<script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1d3557 0%, #0077cc 45%, #e63946 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(29, 53, 87, 0.08), 0 8px 10px -6px rgba(29, 53, 87, 0.05);
+        }
+    </style>
+</head>
+
+
+<body class="bg-gray-50 text-gray-900 antialiased selection:bg-brandRed selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-3 sm:px-8 lg:px-12 h-16 sm:h-24 flex items-center justify-between">
+
+        <!-- LOGO -->
+        <div class="flex items-center gap-2">
+            <a href="/index.html" class="flex items-center">
+                <img src="/logo.png" alt="Logo PackImpresión"
+                     class="w-32 sm:w-52 lg:w-60 h-auto object-contain"
+                     onerror="this.src='https://placehold.co/240x60/1d3557/ffffff?text=PackImpresion'">
+            </a>
+        </div>
+
+        <!-- MENÚ -->
+        <nav class="hidden md:flex items-center gap-8 font-medium text-base lg:text-lg text-gray-700">
+            <a href="index.html#fotos" class="hover:text-brandRed transition-colors">Packs Fotos</a>
+            <a href="index.html#documentos" class="hover:text-brandRed transition-colors">A4 y A3</a>
+            <a href="index.html#especiales" class="hover:text-brandRed transition-colors">Especiales</a>
+            <a href="index.html#estadisticas" class="hover:text-brandRed transition-colors">Confianza</a>
+            <a href="index.html#faq" class="hover:text-brandRed transition-colors">FAQ</a>
+        </nav>
+
+        <!-- ICONOS + WHATSAPP + TIENDA -->
+        <div class="flex items-center gap-2 sm:gap-4">
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/profile.php?id=61572048155663"
+               target="_blank" aria-label="Facebook"
+               class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gray-100 hover:bg-[#1877F2] hover:text-white 
+                      text-gray-700 flex items-center justify-center transition-all shadow-sm 
+                      text-sm sm:text-lg">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/34684792506?text=Hola,%20me%20gustaría%20consultar%20sobre%20una%20impresión"
+               target="_blank" aria-label="WhatsApp"
+               class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gray-100 hover:bg-emerald-500 hover:text-white 
+                      text-gray-700 flex items-center justify-center transition-all shadow-sm 
+                      text-sm sm:text-lg">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+            <!-- Botón Inicio (color marca) -->
+            <a href="/index.html"
+            class="px-4 sm:px-6 py-2 sm:py-3 bg-brandRed hover:bg-[#c62836] text-white 
+                    font-semibold rounded-full shadow-md shadow-red-500/20 transition-all 
+                    transform hover:-translate-y-0.5 text-xs sm:text-base">
+                Inicio
+            </a>
+
+
+
+
+
+
+        </div>
+
+    </div>
+</header>
+
 
 <style>
 .fade-in {
@@ -52,16 +154,10 @@
 
 </head>
 
-<body class="bg-gray-50">
 
-<header class="py-6 bg-white shadow-sm fade-in">
-    <div class="container mx-auto text-center">
-        <img src="/logo.png" class="w-40 mx-auto">
-        <h1 class="text-2xl font-bold text-[#0077cc] mt-2">Tienda PackImpresión</h1>
-        <p class="text-gray-600">Llaveros, cuadros y regalos personalizados</p>
-    </div>
-    
-</header>
+
+
+
 
 <section class="py-12 fade-in">
     <div id="tienda" class="container mx-auto grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -323,18 +419,13 @@ function vaciarCarrito() {
     updateCartCount();
     showToast("Carrito vaciado");
 }
+
+
+
 </script>
-
-
 <div id="toast"
      class="fixed top-4 left-1/2 -translate-x-1/2 bg-black text-white px-4 py-2 rounded-xl opacity-0 transition z-[999999]">
 </div>
-
-<section id="mis-pedidos" class="hidden container mx-auto p-6">
-    <h2 class="text-2xl font-bold mb-4 text-[#0077cc]">Mis pedidos</h2>
-    <ul id="listaPedidos" class="space-y-4"></ul>
-</section>
-
 
 </body>
 </html>
