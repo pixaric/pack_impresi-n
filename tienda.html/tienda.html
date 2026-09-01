@@ -263,7 +263,13 @@ function showCart() {
 function sendCartWhatsApp() {
     if (cart.length === 0) return;
 
+    // Fecha y hora actual
+    const fecha = new Date().toLocaleDateString();
+    const hora = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
     let msg = "🧾 *Ticket de Pedido – PackImpresión*%0A";
+    msg += `Fecha: ${fecha}%0A`;
+    msg += `Hora: ${hora}%0A%0A`;
     msg += "------------------------------------%0A%0A";
 
     cart.forEach(item => {
@@ -284,6 +290,7 @@ function sendCartWhatsApp() {
 
     window.open("https://wa.me/34684792506?text=" + msg, "_blank");
 }
+
 
 /* ===========================
    CONTADOR DEL CARRITO
