@@ -19,6 +19,35 @@
 }
 .product-card { transition: 0.3s ease; }
 .product-card:hover { transform: translateY(-6px); }
+
+.add-pop {
+    animation: popAdd 0.3s ease;
+}
+
+@keyframes popAdd {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translate(-50%, 10px);
+}
+
+.cart-anim {
+    animation: cartOpen 0.35s ease;
+}
+
+@keyframes cartOpen {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+
+
+
+
 </style>
 
 </head>
@@ -31,6 +60,12 @@
         <h1 class="text-2xl font-bold text-[#0077cc] mt-2">Tienda PackImpresión</h1>
         <p class="text-gray-600">Llaveros, cuadros y regalos personalizados</p>
     </div>
+    <a href="#mis-pedidos"
+   onclick="mostrarPedidos()"
+   class="text-[#0077cc] font-semibold underline">
+   Mis pedidos
+</a>
+
 </header>
 
 <section class="py-12 fade-in">
@@ -50,6 +85,11 @@
             class="w-full mt-4 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 rounded-xl transition">
         Enviar pedido por WhatsApp
     </button>
+    <button onclick="vaciarCarrito()"
+        class="w-full mt-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl transition">
+    Vaciar carrito
+</button>
+
 </div>
 
 <!-- BOTÓN FLOTANTE DEL CARRITO -->
@@ -99,10 +139,11 @@ function generarProductos() {
                 <p class="text-gray-600 text-sm mb-2">Producto personalizado PackImpresión.</p>
                 <p class="text-xl font-bold text-[#0077cc] mb-3">${p.precio} €</p>
 
-                <button onclick="addToCartQty('${p.nombre}', ${p.precio})"
-                        class="w-full bg-[#0077cc] hover:bg-[#005fa3] text-white font-semibold py-2 rounded-xl transition">
-                    Añadir al carrito
-                </button>
+                <button onclick="addToCartQty('${p.nombre}', ${p.precio}, this)"
+        class="add-btn w-full bg-[#0077cc] hover:bg-[#005fa3] text-white font-semibold py-2 rounded-xl transition">
+    Añadir al carrito
+</button>
+
             </div>
         </div>`;
     });
@@ -115,7 +156,10 @@ generarProductos();
    =========================== */
 let cart = JSON.parse(localStorage.getItem('cartPackImpresion') || '[]');
 
-function addToCartQty(name, price) {
+function addToCartQty(name, price, btn) {
+    btn.classList.add("add-pop");
+    setTimeout(() => btn.classList.remove("add-pop"), 300);
+
     const existingItem = cart.find(item => item.name === name);
 
     if (existingItem) {
@@ -127,8 +171,10 @@ function addToCartQty(name, price) {
     localStorage.setItem('cartPackImpresion', JSON.stringify(cart));
     updateCartUI();
     updateCartCount();
+    showToast(`${name} añadido al carrito`);
     showCart();
 }
+
 
 function updateCartUI() {
     const list = document.getElementById('cartItems');
@@ -191,8 +237,12 @@ function toggleCart() {
 }
 
 function showCart() {
-    document.getElementById('cartBox').classList.remove('hidden');
+    const cartBox = document.getElementById('cartBox');
+    cartBox.classList.remove('hidden');
+    cartBox.classList.add('cart-anim');
+    setTimeout(() => cartBox.classList.remove('cart-anim'), 350);
 }
+
 
 function sendCartWhatsApp() {
     if (cart.length === 0) return;
@@ -217,6 +267,8 @@ function sendCartWhatsApp() {
     msg += "📲 Gracias por su pedido";
 
     window.open("https://wa.me/34684792506?text=" + msg, "_blank");
+    guardarPedido();
+
 }
 
 
@@ -226,8 +278,82 @@ function sendCartWhatsApp() {
 function updateCartCount() {
     const count = cart.reduce((sum, item) => sum + item.quantity, 0);
     document.getElementById("cartCount").textContent = count;
+
 }
+
+function showToast(msg) {
+    const toast = document.getElementById("toast");
+    toast.textContent = msg;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1800);
+}
+
+function vaciarCarrito() {
+    cart = [];
+    localStorage.setItem('cartPackImpresion', JSON.stringify(cart));
+    updateCartUI();
+    updateCartCount();
+    showToast("Carrito vaciado");
+}
+
+
+
+
+
+
+function guardarPedido() {
+    const pedidos = JSON.parse(localStorage.getItem('pedidosPackImpresion') || '[]');
+    pedidos.push(cart);
+    localStorage.setItem('pedidosPackImpresion', JSON.stringify(pedidos));
+}
+
+function mostrarPedidos() {
+    const pedidos = JSON.parse(localStorage.getItem('pedidosPackImpresion') || '[]');
+    const lista = document.getElementById("listaPedidos");
+
+    lista.innerHTML = "";
+
+    if (pedidos.length === 0) {
+        lista.innerHTML = "<p class='text-gray-500'>No hay pedidos aún.</p>";
+        return;
+    }
+
+    pedidos.forEach((pedido, i) => {
+        let html = `<li class='border p-4 rounded-xl bg-white shadow'>
+                        <h3 class='font-bold mb-2'>Pedido #${i + 1}</h3>`;
+
+        pedido.forEach(item => {
+            html += `<p>${item.name} (x${item.quantity}) - ${(item.price * item.quantity).toFixed(2)} €</p>`;
+        });
+
+        const total = pedido.reduce((s, it) => s + (it.price * it.quantity), 0);
+
+        html += `<p class='font-bold mt-2'>Total: ${total.toFixed(2)} €</p></li>`;
+
+        lista.innerHTML += html;
+    });
+
+    document.getElementById("mis-pedidos").classList.remove("hidden");
+    showToast("Mostrando pedidos");
+}
+
 </script>
+
+
+
+
+<div id="toast"
+     class="fixed top-4 left-1/2 -translate-x-1/2 bg-black text-white px-4 py-2 rounded-xl opacity-0 transition z-[999999]">
+</div>
+
+<section id="mis-pedidos" class="hidden container mx-auto p-6">
+    <h2 class="text-2xl font-bold mb-4 text-[#0077cc]">Mis pedidos</h2>
+    <ul id="listaPedidos" class="space-y-4"></ul>
+</section>
+
 
 </body>
 </html>
