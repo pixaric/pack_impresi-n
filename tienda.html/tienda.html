@@ -60,12 +60,7 @@
         <h1 class="text-2xl font-bold text-[#0077cc] mt-2">Tienda PackImpresión</h1>
         <p class="text-gray-600">Llaveros, cuadros y regalos personalizados</p>
     </div>
-    <a href="#mis-pedidos"
-   onclick="mostrarPedidos()"
-   class="text-[#0077cc] font-semibold underline">
-   Mis pedidos
-</a>
-
+    
 </header>
 
 <section class="py-12 fade-in">
@@ -105,10 +100,12 @@
 <audio id="addSound" src="/tienda.html/sounds/add.mp3" preload="auto"></audio>
 
 <script>
-
-    function playAddSound() {
+/* ===========================
+   SONIDO AL AÑADIR
+   =========================== */
+function playAddSound() {
     const sound = document.getElementById("addSound");
-    sound.currentTime = 0; // reinicia el sonido
+    sound.currentTime = 0;
     sound.play();
 }
 
@@ -149,10 +146,9 @@ function generarProductos() {
                 <p class="text-xl font-bold text-[#0077cc] mb-3">${p.precio} €</p>
 
                 <button onclick="addToCartQty('${p.nombre}', ${p.precio}, this)"
-        class="add-btn w-full bg-[#0077cc] hover:bg-[#005fa3] text-white font-semibold py-2 rounded-xl transition">
-    Añadir al carrito
-</button>
-
+                        class="add-btn w-full bg-[#0077cc] hover:bg-[#005fa3] text-white font-semibold py-2 rounded-xl transition">
+                    Añadir al carrito
+                </button>
             </div>
         </div>`;
     });
@@ -174,7 +170,7 @@ function addToCartQty(name, price, btn) {
     // Sonido
     playAddSound();
 
-    // Lógica del carrito
+    // Añadir al carrito
     const existingItem = cart.find(item => item.name === name);
 
     if (existingItem) {
@@ -190,40 +186,39 @@ function addToCartQty(name, price, btn) {
     showCart();
 }
 
-
-
 function updateCartUI() {
     const list = document.getElementById('cartItems');
     list.innerHTML = "";
 
     if (cart.length === 0) {
         list.innerHTML = `<li class="text-gray-400 text-center py-4">El carrito está vacío</li>`;
-    } else {
-        cart.forEach((item, index) => {
-            const itemTotal = item.price * item.quantity;
-
-            list.innerHTML += `
-                <li class="flex justify-between items-center border-b pb-2">
-                    <div>
-                        <span class="font-semibold block">${item.name}</span>
-                        <span class="text-xs text-gray-500">${item.quantity} x ${item.price.toFixed(2)} € = ${itemTotal.toFixed(2)} €</span>
-                    </div>
-
-                    <div class="flex items-center gap-2">
-                        <button class="w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded font-bold text-xs"
-                                onclick="updateItemQuantity(${index}, -1)">-</button>
-
-                        <span class="text-xs font-semibold">${item.quantity}</span>
-
-                        <button class="w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded font-bold text-xs"
-                                onclick="updateItemQuantity(${index}, 1)">+</button>
-
-                        <button class="text-red-500 hover:text-red-700 font-bold px-1 ml-1"
-                                onclick="removeItem(${index})">✕</button>
-                    </div>
-                </li>`;
-        });
+        return;
     }
+
+    cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+
+        list.innerHTML += `
+            <li class="flex justify-between items-center border-b pb-2">
+                <div>
+                    <span class="font-semibold block">${item.name}</span>
+                    <span class="text-xs text-gray-500">${item.quantity} x ${item.price.toFixed(2)} € = ${itemTotal.toFixed(2)} €</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button class="w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded font-bold text-xs"
+                            onclick="updateItemQuantity(${index}, -1)">-</button>
+
+                    <span class="text-xs font-semibold">${item.quantity}</span>
+
+                    <button class="w-6 h-6 bg-gray-100 hover:bg-gray-200 rounded font-bold text-xs"
+                            onclick="updateItemQuantity(${index}, 1)">+</button>
+
+                    <button class="text-red-500 hover:text-red-700 font-bold px-1 ml-1"
+                            onclick="removeItem(${index})">✕</button>
+                </div>
+            </li>`;
+    });
 
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     document.getElementById('cartTotal').textContent = "Total: " + total.toFixed(2) + " €";
@@ -248,6 +243,9 @@ function removeItem(index) {
     updateCartCount();
 }
 
+/* ===========================
+   CARRITO FLOTANTE
+   =========================== */
 function toggleCart() {
     document.getElementById('cartBox').classList.toggle('hidden');
 }
@@ -259,7 +257,9 @@ function showCart() {
     setTimeout(() => cartBox.classList.remove('cart-anim'), 350);
 }
 
-
+/* ===========================
+   WHATSAPP
+   =========================== */
 function sendCartWhatsApp() {
     if (cart.length === 0) return;
 
@@ -283,10 +283,7 @@ function sendCartWhatsApp() {
     msg += "📲 Gracias por su pedido";
 
     window.open("https://wa.me/34684792506?text=" + msg, "_blank");
-    guardarPedido();
-
 }
-
 
 /* ===========================
    CONTADOR DEL CARRITO
@@ -294,9 +291,11 @@ function sendCartWhatsApp() {
 function updateCartCount() {
     const count = cart.reduce((sum, item) => sum + item.quantity, 0);
     document.getElementById("cartCount").textContent = count;
-
 }
 
+/* ===========================
+   TOAST
+   =========================== */
 function showToast(msg) {
     const toast = document.getElementById("toast");
     toast.textContent = msg;
@@ -307,6 +306,9 @@ function showToast(msg) {
     }, 1800);
 }
 
+/* ===========================
+   VACIAR CARRITO
+   =========================== */
 function vaciarCarrito() {
     cart = [];
     localStorage.setItem('cartPackImpresion', JSON.stringify(cart));
@@ -314,51 +316,7 @@ function vaciarCarrito() {
     updateCartCount();
     showToast("Carrito vaciado");
 }
-
-
-
-
-
-
-function guardarPedido() {
-    const pedidos = JSON.parse(localStorage.getItem('pedidosPackImpresion') || '[]');
-    pedidos.push(cart);
-    localStorage.setItem('pedidosPackImpresion', JSON.stringify(pedidos));
-}
-
-function mostrarPedidos() {
-    const pedidos = JSON.parse(localStorage.getItem('pedidosPackImpresion') || '[]');
-    const lista = document.getElementById("listaPedidos");
-
-    lista.innerHTML = "";
-
-    if (pedidos.length === 0) {
-        lista.innerHTML = "<p class='text-gray-500'>No hay pedidos aún.</p>";
-        return;
-    }
-
-    pedidos.forEach((pedido, i) => {
-        let html = `<li class='border p-4 rounded-xl bg-white shadow'>
-                        <h3 class='font-bold mb-2'>Pedido #${i + 1}</h3>`;
-
-        pedido.forEach(item => {
-            html += `<p>${item.name} (x${item.quantity}) - ${(item.price * item.quantity).toFixed(2)} €</p>`;
-        });
-
-        const total = pedido.reduce((s, it) => s + (it.price * it.quantity), 0);
-
-        html += `<p class='font-bold mt-2'>Total: ${total.toFixed(2)} €</p></li>`;
-
-        lista.innerHTML += html;
-    });
-
-    document.getElementById("mis-pedidos").classList.remove("hidden");
-    showToast("Mostrando pedidos");
-}
-
 </script>
-
-
 
 
 <div id="toast"
