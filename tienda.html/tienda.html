@@ -19,10 +19,6 @@
 }
 .product-card { transition: 0.3s ease; }
 .product-card:hover { transform: translateY(-6px); }
-
-/* FAVORITOS */
-.fav-btn { color: gray; transition: 0.3s ease; }
-.fav-btn.fav { color: red; }
 </style>
 
 </head>
@@ -83,9 +79,6 @@ const productos = [
     { nombre: "Marco Premium", precio: 30, img: "/img/regalo6.jpg", etiqueta: "Nuevo" }
 ];
 
-/* FAVORITOS */
-let favoritos = JSON.parse(localStorage.getItem('favoritosPackImpresion') || '[]');
-
 /* ===========================
    GENERAR TIENDA
    =========================== */
@@ -94,17 +87,10 @@ function generarProductos() {
     tienda.innerHTML = "";
 
     productos.forEach((p) => {
-        const esFav = favoritos.includes(p.nombre);
-
         tienda.innerHTML += `
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-t-4 border-[#0077cc] product-card fade-in relative">
 
             <span class="absolute bg-emerald-500 text-white text-xs font-semibold px-3 py-1 rounded-br-xl">${p.etiqueta}</span>
-
-            <button onclick="toggleFav('${p.nombre}', this)"
-                    class="fav-btn absolute top-2 right-2 bg-white/80 w-10 h-10 rounded-full flex items-center justify-center shadow-md ${esFav ? 'fav' : ''}">
-                ❤️
-            </button>
 
             <img src="${p.img}" class="w-full h-40 object-cover">
 
@@ -123,7 +109,6 @@ function generarProductos() {
 }
 
 generarProductos();
-pintarFavoritos();
 
 /* ===========================
    CARRITO
@@ -212,14 +197,28 @@ function showCart() {
 function sendCartWhatsApp() {
     if (cart.length === 0) return;
 
-    let msg = "Hola, quiero realizar este pedido:%0A%0A";
-    cart.forEach(item => msg += `• ${item.name} (x${item.quantity}) - ${(item.price * item.quantity).toFixed(2)} €%0A`);
+    let msg = "🧾 *Ticket de Pedido – PackImpresión*%0A";
+    msg += "------------------------------------%0A%0A";
+
+    cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+
+        msg += `📦 *${item.name}*%0A`;
+        msg += `   Cantidad: ${item.quantity}%0A`;
+        msg += `   Precio unidad: ${item.price.toFixed(2)} €%0A`;
+        msg += `   Subtotal: ${subtotal.toFixed(2)} €%0A%0A`;
+    });
+
+    msg += "------------------------------------%0A";
 
     const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
-    msg += `%0ATotal: ${total.toFixed(2)} €`;
+    msg += `🧮 *Total a pagar:* ${total.toFixed(2)} €%0A`;
+    msg += "------------------------------------%0A%0A";
+    msg += "📲 Gracias por su pedido";
 
     window.open("https://wa.me/34684792506?text=" + msg, "_blank");
 }
+
 
 /* ===========================
    CONTADOR DEL CARRITO
@@ -227,33 +226,6 @@ function sendCartWhatsApp() {
 function updateCartCount() {
     const count = cart.reduce((sum, item) => sum + item.quantity, 0);
     document.getElementById("cartCount").textContent = count;
-}
-
-/* ===========================
-   FAVORITOS
-   =========================== */
-function toggleFav(nombre, btn) {
-    if (favoritos.includes(nombre)) {
-        favoritos = favoritos.filter(f => f !== nombre);
-        btn.classList.remove("fav");
-    } else {
-        favoritos.push(nombre);
-        btn.classList.add("fav");
-    }
-
-    localStorage.setItem('favoritosPackImpresion', JSON.stringify(favoritos));
-}
-
-function pintarFavoritos() {
-    document.querySelectorAll(".fav-btn").forEach(btn => {
-        const nombre = btn.getAttribute("onclick").match(/'(.+?)'/)[1];
-
-        if (favoritos.includes(nombre)) {
-            btn.classList.add("fav");
-        } else {
-            btn.classList.remove("fav");
-        }
-    });
 }
 </script>
 
