@@ -189,6 +189,8 @@
 </button>
 
 <audio id="addSound" src="./sounds/add.mp3" preload="auto"></audio>
+<audio id="clearSound" src="./sounds/clear.mp3" preload="auto"></audio>
+
 
 <script>
 /* ===========================
@@ -199,6 +201,13 @@ function playAddSound() {
     sound.currentTime = 0;
     sound.play();
 }
+
+function playClearSound() {
+    const sound = document.getElementById("clearSound");
+    sound.currentTime = 0;
+    sound.play();
+}
+
 
 /* ===========================
    PRODUCTOS
@@ -408,12 +417,26 @@ function showToast(msg) {
    VACIAR CARRITO
    =========================== */
 function vaciarCarrito() {
+
+    // 🔊 Sonido de vaciar carrito
+    const clearSound = document.getElementById("clearSound");
+    if (clearSound) {
+        clearSound.currentTime = 0;
+        clearSound.play();
+    }
+
+    // 🛒 Vaciar carrito
     cart = [];
     localStorage.setItem('cartPackImpresion', JSON.stringify(cart));
+
+    // 🔄 Actualizar UI
     updateCartUI();
     updateCartCount();
+
+    // 🔔 Notificación
     showToast("Carrito vaciado");
 }
+
 
 
 
