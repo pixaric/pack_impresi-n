@@ -56,8 +56,7 @@
     </button>
 </div>
 
-
-<!-- BOTÓN FLOTANTE DEL CARRITO (ÚNICO Y SIEMPRE VISIBLE) -->
+<!-- BOTÓN FLOTANTE DEL CARRITO -->
 <button onclick="toggleCart()"
         class="fixed bottom-4 right-4 bg-[#0077cc] text-white w-16 h-16 rounded-full shadow-xl text-3xl flex items-center justify-center z-[999999]">
     🛒
@@ -66,8 +65,6 @@
         0
     </span>
 </button>
-
-
 
 <script>
 /* ===========================
@@ -116,13 +113,7 @@ function generarProductos() {
                 <p class="text-gray-600 text-sm mb-2">Producto personalizado PackImpresión.</p>
                 <p class="text-xl font-bold text-[#0077cc] mb-3">${p.precio} €</p>
 
-                <div class="flex items-center gap-3 mb-4">
-                    <button onclick="changeQty(this, -1)" class="w-8 h-8 bg-gray-200 rounded-lg text-lg font-bold">–</button>
-                    <span class="qty text-lg font-semibold">1</span>
-                    <button onclick="changeQty(this, 1)" class="w-8 h-8 bg-gray-200 rounded-lg text-lg font-bold">+</button>
-                </div>
-
-                <button onclick="addToCartQty('${p.nombre}', ${p.precio}, this)"
+                <button onclick="addToCartQty('${p.nombre}', ${p.precio})"
                         class="w-full bg-[#0077cc] hover:bg-[#005fa3] text-white font-semibold py-2 rounded-xl transition">
                     Añadir al carrito
                 </button>
@@ -132,29 +123,20 @@ function generarProductos() {
 }
 
 generarProductos();
+pintarFavoritos();
 
 /* ===========================
    CARRITO
    =========================== */
 let cart = JSON.parse(localStorage.getItem('cartPackImpresion') || '[]');
 
-function changeQty(btn, amount) {
-    const qtySpan = btn.parentElement.querySelector('.qty');
-    let qty = parseInt(qtySpan.textContent);
-    qty = Math.max(1, qty + amount);
-    qtySpan.textContent = qty;
-}
-
-function addToCartQty(name, price, btn) {
-    const qty = parseInt(btn.parentElement.querySelector('.qty').textContent);
-
-    // Buscar si el producto ya está en el carrito
+function addToCartQty(name, price) {
     const existingItem = cart.find(item => item.name === name);
 
     if (existingItem) {
-        existingItem.quantity += qty; // aumentar cantidad
+        existingItem.quantity += 1;
     } else {
-        cart.push({ name, price, quantity: qty }); // nuevo producto
+        cart.push({ name, price, quantity: 1 });
     }
 
     localStorage.setItem('cartPackImpresion', JSON.stringify(cart));
@@ -162,8 +144,6 @@ function addToCartQty(name, price, btn) {
     updateCartCount();
     showCart();
 }
-
-
 
 function updateCartUI() {
     const list = document.getElementById('cartItems');
@@ -202,12 +182,11 @@ function updateCartUI() {
     document.getElementById('cartTotal').textContent = "Total: " + total.toFixed(2) + " €";
 }
 
-
 function updateItemQuantity(index, amount) {
     cart[index].quantity += amount;
 
     if (cart[index].quantity <= 0) {
-        cart.splice(index, 1); // eliminar si llega a 0
+        cart.splice(index, 1);
     }
 
     localStorage.setItem('cartPackImpresion', JSON.stringify(cart));
@@ -215,16 +194,12 @@ function updateItemQuantity(index, amount) {
     updateCartCount();
 }
 
-
-
 function removeItem(index) {
     cart.splice(index, 1);
     localStorage.setItem('cartPackImpresion', JSON.stringify(cart));
     updateCartUI();
     updateCartCount();
 }
-
-
 
 function toggleCart() {
     document.getElementById('cartBox').classList.toggle('hidden');
@@ -238,9 +213,9 @@ function sendCartWhatsApp() {
     if (cart.length === 0) return;
 
     let msg = "Hola, quiero realizar este pedido:%0A%0A";
-    cart.forEach(item => msg += `• ${item.name} - ${item.price} €%0A`);
+    cart.forEach(item => msg += `• ${item.name} (x${item.quantity}) - ${(item.price * item.quantity).toFixed(2)} €%0A`);
 
-    const total = cart.reduce((s, i) => s + i.price, 0);
+    const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
     msg += `%0ATotal: ${total.toFixed(2)} €`;
 
     window.open("https://wa.me/34684792506?text=" + msg, "_blank");
@@ -254,10 +229,8 @@ function updateCartCount() {
     document.getElementById("cartCount").textContent = count;
 }
 
-
-
 /* ===========================
-FAVORITOS
+   FAVORITOS
    =========================== */
 function toggleFav(nombre, btn) {
     if (favoritos.includes(nombre)) {
@@ -282,12 +255,6 @@ function pintarFavoritos() {
         }
     });
 }
-
-generarProductos();
-pintarFavoritos();
-
-
-
 </script>
 
 </body>
